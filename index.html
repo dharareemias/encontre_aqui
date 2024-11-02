@@ -267,8 +267,39 @@ main{
         
     }
 
-    // Chama a função para exibir os serviços ao carregar a página
-    window.onload = mostrarServicos;
+    function adicionarDemonstracao() {
+        const vagaContainer = document.getElementById('vagas');
+        
+        const modelos = [
+            {
+                servico: "designer",
+                nome: "dhandara omena",
+                telefone: "82987342053",
+                email: "dhataomena@gmail.com",
+                valor: "10,00",
+                descricao: "se você gostou, tente duivulgar seu serviço indo no botão de afiliados e adicione seu modelo e espere os clientes lhe chamarem"
+            },
+            
+        ];
+
+        modelos.forEach((servico) => {
+            vagaContainer.innerHTML += `
+                <div class="servico-card">
+                    <p class="servico-titulo">Serviço: serviço de demonstração , não funciona de fato</p>
+                    <p><strong>Nome:</strong> ${servico.nome}</p>
+                    <p><strong>Telefone:</strong> ${servico.telefone}</p>
+                    <p><strong>Email:</strong> ${servico.email}</p>
+                    <p><strong>Valor:</strong> ${servico.valor}</p>
+                    <p><strong>Descrição:</strong> ${servico.descricao}</p>
+                </div>
+            `;
+        });
+    }
+
+    window.onload = function() {
+        mostrarServicos();
+        adicionarDemonstracao(); // Adiciona as divs de demonstração ao carregar a página
+    };
     </script>
 </body>
 </html>
