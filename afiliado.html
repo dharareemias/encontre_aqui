@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procura Vagas</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="img/letreiro.jpeg" type="image/x-icon">
+    <style>
+        .container_vagas {
+            background-color: #090231;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 1200px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .tabela input{
+            margin: 7px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #faf9f9;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+        }
+
+        .inline-group {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .inline-group input {
+            width: 48%;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color:  #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <img src="img/WhatsApp Image 2024-11-01 at 17.53.51.jpeg" alt="Logo" style="border-radius: 90px;">
+        </div>
+        <h1>bem vindo aos afiliados</h1>
+        <nav>
+            <a href="index.html">
+                <button id="menuButton">voltar ao Menu</button>
+            </a>
+        </nav>
+    </header>
+    <div style="width: 100%; height: 200px;margin-top: 10px; background-color: white; display: flex; align-items: center; justify-content: center;">
+        <img src="img/letreiro.jpeg" alt="" style="width: 30%; height: 100%;">
+    </div>
+    <main style="display:flex ; flex-direction: column; justify-content: center; align-items: center;">
+
+        <div class="container_vagas">
+            <h2 style="text-align: center;">cadastre seus serviços</h2>
+            <div class="vagas">
+                <div class="tabela" style="display: flex; flex-direction: column;">
+                    <input type="text" id="servico" placeholder="digite seu serviço">
+                    <input type="text" id="nome" placeholder="digite seu nome">
+                    <div style="display: flex;">
+                        <input type="text" id="telefone" placeholder="telefone">
+                        <input type="text" id="email" placeholder="e-mail">
+                    </div>
+                    <input type="text" id="valor" placeholder="valor do serviço" style="width: 100px;">
+                    <textarea id="descricao_servico" placeholder="Descreva seu serviço" style="width: 100%; height: 200px; resize: vertical;"></textarea>
+                    <div style="display: flex;">
+                        <button style="margin: 7px;" onclick="adicionarServico()">Enviar</button>
+                        <button style="margin: 7px;" onclick="limparDados()">Limpar Dados</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script> 
+    function adicionarServico() { 
+        const servico = document.getElementById('servico').value;
+        const nome = document.getElementById('nome').value;
+        const telefone = document.getElementById('telefone').value;
+        const email = document.getElementById('email').value;
+        const valor = document.getElementById('valor').value;
+        const descricao = document.getElementById('descricao_servico').value;
+
+        const servicoObj = { 
+            servico, 
+            nome, 
+            telefone, 
+            email, 
+            valor, 
+            descricao
+        };
+
+        let servicos = JSON.parse(localStorage.getItem('servicos')) || [];
+        servicos.push(servicoObj);
+        localStorage.setItem('servicos', JSON.stringify(servicos));
+        alert('Serviço adicionado com sucesso!');
+        limparInputs();
+    } 
+
+    function limparDados() { 
+        localStorage.clear();
+        alert('Todos os dados foram limpos.');
+    }
+
+    function limparInputs() {
+        document.getElementById('servico').value = '';
+        document.getElementById('nome').value = '';
+        document.getElementById('telefone').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('valor').value = '';
+        document.getElementById('descricao_servico').value = '';
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procura Vagas</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="img/letreiro.jpeg" type="image/x-icon">
+    
+    <style>
+main{
+    background-color: rgb(38, 38, 48);
+}
+
+.servico-card {
+    background-color: #0e0d0d;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+    padding: 20px;
+    width: 100%;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.servico-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.servico-titulo {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #007bff;
+}
+
+.servico-card p {
+    margin: 5px 0;
+    color: #fffafa;
+}
+
+.nenhum-servico {
+    text-align: center;
+    color: #888;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.navbar {
+            background-color: #1a73e8;
+        }
+
+        .navbar-nav .nav-link {
+            color: #fff;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #d2e3fc;
+        }
+
+
+</style>
+</head>
+<body>
+    <header>
+        <div style=" display: flex;">
+            <img src="img/WhatsApp Image 2024-11-01 at 17.53.51.jpeg" alt="Logo" style="border-radius: 90px;">
+            <div>
+                <h1 style=" margin: 10px;">Busque serviços aqui</h1>
+            </div>
+        </div>
+       
+        <div style="display: flex; width: 15%; justify-content: end;">
+            
+            <a href="https://www.instagram.com/sistemas.i9/" >
+                <img src="img/instagram.jfif" alt="" style="border-radius: 90px; margin: 10px; height: 40px;">
+            </a>
+        </div>
+    </header>
+    <div style="width: 100%; display: flex; justify-content: center; align-items: center; height: 50px;">
+        <nav class="nav nav-pills justify-content-center mb-4" style="margin-top: 23px;">
+            <a class="nav-link active" href="afiliado.html">Seja um afiliado</a>
+            <a class="nav-link" href="https://chat.whatsapp.com/LX9e9rLyhCy3UCWgR42uoh">Entre na comunidade</a>
+            <a class="nav-link" href="cliente.html">Perfil cliente</a>
+        </nav>
+    </div>
+    <main>
+        <div class="repositorios">
+            <div class="contender_repositorios">
+                <h3>opções de serviços</h3>
+                <div class="lista_serviços" style="display: flex; flex-direction: column;">
+                    <a href="https://api.whatsapp.com/send?phone=558288873225&text=Olá, estou interessado no serviço de conserto de computador">
+                        <p>conserto de computador</p>
+                    </a>
+                    <a href="https://api.whatsapp.com/send?phone=558288873225&text=Olá, estou interessado no serviço de formatação de computador">
+                        <p>formatação de computador</p>
+                    </a>
+                    <a href="https://api.whatsapp.com/send?phone=558288873225&text=Olá, estou interessado no serviço de limpeza de computador">
+                        <p>limpeza de computador</p>
+                    </a>
+                    <a href="https://api.whatsapp.com/send?phone=558288873225&text=Olá, estou interessado no serviço de criação de sites">
+                        <p>criação de sites</p>
+                    </a>
+                    <a href="https://api.whatsapp.com/send?phone=558288873225&text=Olá, estou interessado no serviço de criação de sistemas para empresas">
+                        <p>criação de sistemas para empresas</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="container_vagas">
+            <h1 style="text-align: center;">Procure o serviço que deseja</h1>
+            <div class="vagas">
+                <div class="barra_pesquisa">
+                    <input type="text" id="procurar">
+                    <button style="width: 100px;" onclick="procurarVaga()">Pesquisar</button>
+                </div>
+                <div class="containder_vagas" id="vagas" style="display: flex; flex-direction: column; align-items: center; justify-items: center;">
+                    <!-- Serviços serão adicionados aqui -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalContent">
+                <!-- Conteúdo do modal será adicionado aqui -->
+            </div>
+            <button id="whatsappButton" style="background-color: #25D366; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer;">Chamar no WhatsApp</button>
+        </div>
+    </div>
+
+    <script>
+    // Função para pegar os dados do LocalStorage e exibir na containder_vagas
+    function mostrarServicos() {
+        const servicos = JSON.parse(localStorage.getItem('servicos')) || [];
+        const vagaContainer = document.getElementById('vagas');
+        vagaContainer.innerHTML = '';
+
+        if (servicos.length > 0) {
+            servicos.forEach((servico, index) => {
+                vagaContainer.innerHTML += `
+                    <div class="servico-card" onclick="mostrarDetalhes(${index})">
+                        <p class="servico-titulo">Serviço: ${servico.servico}</p>
+                        <p><strong>Nome:</strong> ${servico.nome}</p>
+                        <p><strong>Telefone:</strong> ${servico.telefone}</p>
+                        <p><strong>Email:</strong> ${servico.email}</p>
+                        <p><strong>Valor:</strong> ${servico.valor}</p>
+                        <p><strong>Descrição:</strong> ${servico.descricao}</p>
+                    </div>
+                `;
+            });
+        } else {
+            vagaContainer.innerHTML = '<p class="nenhum-servico">Nenhum serviço cadastrado.</p>';
+        }
+    }
+
+    // Função para filtrar os serviços pelo nome procurado
+    function procurarVaga() {
+        const procurarInput = document.getElementById('procurar').value.toLowerCase();
+        const servicos = JSON.parse(localStorage.getItem('servicos')) || [];
+        const vagaContainer = document.getElementById('vagas');
+        const servicosFiltrados = servicos.filter(servico => 
+            servico.servico.toLowerCase().includes(procurarInput)
+        );
+
+        vagaContainer.innerHTML = '';
+
+        if (servicosFiltrados.length > 0) {
+            servicosFiltrados.forEach((servico, index) => {
+                vagaContainer.innerHTML += `
+                    <div class="servico-card" onclick="mostrarDetalhes(${index})">
+                        <p class="servico-titulo">Serviço: ${servico.servico}</p>
+                        <p><strong>Nome:</strong> ${servico.nome}</p>
+                        <p><strong>Telefone:</strong> ${servico.telefone}</p>
+                        <p><strong>Email:</strong> ${servico.email}</p>
+                        <p><strong>Valor:</strong> ${servico.valor}</p>
+                        <p><strong>Descrição:</strong> ${servico.descricao}</p>
+                    </div>
+                `;
+            });
+        } else {
+            vagaContainer.innerHTML = '<p>Serviço não encontrado, tente outro serviço ou nome.</p>';
+        }
+    }
+
+    // Função para mostrar os detalhes do serviço em um modal
+    function mostrarDetalhes(index) {
+        const servicos = JSON.parse(localStorage.getItem('servicos')) || [];
+        const servico = servicos[index];
+
+        const modalContent = document.getElementById('modalContent');
+        modalContent.innerHTML = `
+            <p class="servico-titulo">Serviço: ${servico.servico}</p>
+            <p><strong>Nome:</strong> ${servico.nome}</p>
+            <p><strong>Telefone:</strong> ${servico.telefone}</p>
+            <p><strong>Email:</strong> ${servico.email}</p>
+            <p><strong>Valor:</strong> ${servico.valor}</p>
+            <p><strong>Descrição:</strong> ${servico.descricao}</p>
+        `;
+
+        // Adiciona o evento de clique para o botão do WhatsApp
+        document.getElementById('whatsappButton').onclick = function() {
+            enviarWhatsapp(servico);
+        };
+
+        // Exibe o modal
+        document.getElementById('myModal').style.display = 'block';
+    }
+
+    // Função para fechar o modal
+    function closeModal() {
+        document.getElementById('myModal').style.display = 'none';
+    }
+
+    // Função para enviar os dados do serviço para outra página e iniciar uma conversa no WhatsApp
+    function enviarWhatsapp(servico) {
+        const url = `https://api.whatsapp.com/send?phone=${servico.telefone}&text=Olá, estou interessado no serviço de ${servico.servico}`;
+        
+        // Armazena o serviço no sessionStorage para ser usado na outra página
+        sessionStorage.setItem('servicoSelecionado', JSON.stringify(servico));
+
+        // Redireciona para o WhatsApp e para a página de detalhes do serviço
+        window.location.href = url;
+        
+    }
+
+    // Chama a função para exibir os serviços ao carregar a página
+    window.onload = mostrarServicos;
+    </script>
+</body>
+</html>
